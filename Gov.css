@@ -1,0 +1,251 @@
+/* Gov.css - Card layout for government links */
+:root{
+	--bg: #f5f7fb;
+	--card-bg: #fff;
+	--muted: #556070;
+	--accent: #0b5cff;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	background: var(--bg);
+	color: #111827;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+.page {
+	max-width:1100px;
+	margin:28px auto;
+	padding:20px;
+}
+
+/* Top navigation */
+.site-nav{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	gap:12px;
+	padding:12px 18px;
+	background: linear-gradient(90deg, rgba(6,21,80,0.06), rgba(6,133,255,0.04));
+	border-radius:12px;
+	margin:14px auto 8px auto;
+	max-width:1100px;
+	box-shadow: 0 6px 20px rgba(11,22,44,0.04);
+}
+
+.brand{
+	font-weight:800;
+	font-size:1.05rem;
+	letter-spacing:0.2px;
+	/* colorful gradient text */
+	background: linear-gradient(90deg,#0b5cff,#06b6d4,#7c3aed);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.search-form{
+	display:flex;
+	align-items:center;
+	gap:8px;
+}
+
+.search-form input[type="search"]{
+	width:320px;
+	max-width:50vw;
+	padding:8px 12px;
+	border-radius:999px;
+	border:1px solid rgba(15,23,42,0.08);
+	background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));
+	font-size:0.95rem;
+	transition: box-shadow 160ms, border-color 160ms;
+}
+
+.search-form input[type="search"]:focus{
+	outline:none;
+	border-color: rgba(11,92,255,0.95);
+	box-shadow: 0 6px 18px rgba(11,92,255,0.08);
+}
+
+.search-form button{
+	appearance:none;
+	border:0;
+	background:transparent;
+	width:34px;
+	height:34px;
+	border-radius:8px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	cursor:pointer;
+	color:var(--muted);
+}
+
+.search-form button:hover{ color: #111827 }
+
+@media (max-width:640px){
+	.search-form input[type="search"]{ width:180px; }
+	.site-nav{ padding:10px 12px }
+}
+
+/* Subtle page background */
+.page{
+	background: linear-gradient(180deg, rgba(14,165,233,0.03), rgba(99,102,241,0.02));
+	border-radius: 10px;
+}
+
+h1{
+	margin:0 0 18px 0;
+	font-size:1.6rem;
+	color: #0f172a;
+}
+
+/* Grid container for topic cards */
+.topics-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 18px;
+	margin-top: 14px;
+}
+
+/* Card base (anchor is the whole card) */
+.card {
+	display: block;
+	background: var(--card-bg);
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 6px 18px rgba(13,18,25,0.06);
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms, border 220ms;
+	text-decoration: none;
+	color: inherit;
+	min-height: 96px;
+	border: 1px solid rgba(15,23,42,0.04);
+}
+
+.card:focus{outline:none}
+.card:focus-visible{
+	box-shadow: 0 10px 30px rgba(11,92,255,0.12);
+	transform: translateY(-6px);
+}
+
+.card:hover{
+	transform: translateY(-8px);
+	box-shadow: 0 20px 48px rgba(13,18,25,0.12);
+}
+
+/* Colorful card backgrounds via CSS variables and nth-child cycling */
+.topics-grid .card{
+	--card-bg: linear-gradient(180deg,#ffffff,#ffffff);
+	--card-bg-hover: linear-gradient(180deg,#f3f4f6,#e5e7eb);
+	--card-color: #0b2440;
+	--card-color-hover: #ffffff;
+	background: var(--card-bg);
+	color: var(--card-color);
+	transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms, background 300ms ease, color 300ms ease;
+}
+
+.topics-grid .card:hover{
+	background: var(--card-bg-hover);
+	color: var(--card-color-hover);
+}
+
+/* Make subtitle follow the current color but slightly muted */
+.card-sub{ color: currentColor; opacity: 0.85; }
+
+/* define a palette of 6 colorful variants that cycle */
+.topics-grid .card:nth-child(6n+1){ --card-bg: linear-gradient(135deg,#ffd6a5,#ff8a00); --card-bg-hover: linear-gradient(135deg,#ff8a00,#d86200); --card-color: #0d1724; --card-color-hover:#fff }
+.topics-grid .card:nth-child(6n+2){ --card-bg: linear-gradient(135deg,#c7f9cc,#2ecc71); --card-bg-hover: linear-gradient(135deg,#2ecc71,#1e9b4a); --card-color:#07211a; --card-color-hover:#fff }
+.topics-grid .card:nth-child(6n+3){ --card-bg: linear-gradient(135deg,#cde7ff,#4da6ff); --card-bg-hover: linear-gradient(135deg,#4da6ff,#1f7fe0); --card-color:#05203a; --card-color-hover:#fff }
+.topics-grid .card:nth-child(6n+4){ --card-bg: linear-gradient(135deg,#f9d6ff,#e04fe0); --card-bg-hover: linear-gradient(135deg,#e04fe0,#9b18a8); --card-color:#2a0533; --card-color-hover:#fff }
+.topics-grid .card:nth-child(6n+5){ --card-bg: linear-gradient(135deg,#ffe7a8,#ffd24d); --card-bg-hover: linear-gradient(135deg,#ffd24d,#ffb300); --card-color:#2b1b00; --card-color-hover:#fff }
+.topics-grid .card:nth-child(6n+6){ --card-bg: linear-gradient(135deg,#d0f0ff,#8fe3ff); --card-bg-hover: linear-gradient(135deg,#8fe3ff,#39c0ff); --card-color:#052933; --card-color-hover:#fff }
+
+/* stronger hover lift when colorful */
+.topics-grid .card:hover{ transform: translateY(-12px) scale(1.015); box-shadow: 0 26px 64px rgba(7,10,25,0.16); }
+
+@media (prefers-reduced-motion: reduce){
+	.topics-grid .card, .moving-header{ animation:none; transition:none }
+}
+
+.card-body{
+	padding:14px 16px;
+	display:flex;
+	flex-direction:column;
+	gap:6px;
+}
+
+.card-title{
+	margin:0;
+	font-size:1.02rem;
+	font-weight:600;
+	color:#0b2440;
+}
+
+.card-sub{
+	margin:0;
+	font-size:0.92rem;
+	color:var(--muted);
+}
+
+.card-meta{
+	margin-top:8px;
+	display:flex;
+	gap:8px;
+	align-items:center;
+	font-size:0.85rem;
+	color:var(--muted);
+}
+
+/* small screens */
+@media (max-width:420px){
+	.page{padding:12px}
+	.topics-grid{gap:12px}
+}
+
+/* Optional: make links clearly separated when printed */
+@media print{.card{box-shadow:none;border:1px solid #ddd}}
+
+/* ---------- Moving, color-changing header ---------- */
+.page-title{margin:0 0 8px 0}
+.marquee-wrapper{
+	overflow:hidden;
+	display:block;
+	width:100%;
+}
+
+.moving-header{
+	display:inline-block;
+	white-space:nowrap;
+	font-size:1.5rem;
+	font-weight:700;
+	letter-spacing:0.4px;
+	padding:4px 0;
+	will-change:transform,color;
+	/* Alternate slide left-to-right and back, with color shifting */
+	animation: slideX 6s ease-in-out infinite alternate, colorShift 6s linear infinite;
+}
+
+/* Slide from left to right, then back (alternate) */
+@keyframes slideX{
+	0%   { transform: translateX(-100%); }
+	100% { transform: translateX(100%); }
+}
+
+@keyframes colorShift{
+	0%   { color: #0b5cff; }
+	25%  { color: #0bbf6b; }
+	50%  { color: #ff8a00; }
+	75%  { color: #e11d48; }
+	100% { color: #6b21a8; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+	.moving-header{ animation: colorShift 6s linear infinite; }
+}
+
+
